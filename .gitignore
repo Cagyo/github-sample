@@ -54,8 +54,6 @@ buck-out/
 */fastlane/Preview.html
 */fastlane/screenshots
 ios/assets/assets/icons/
-ios/BasicGroup/main.jsbundle
-ios/BasicGroup/main.jsbundle.meta
 .vscode
 
 # typescript
@@ -63,3 +61,6 @@ dest/
 
 .jest
 target
+
+# Bundle artifact
+*.jsbundle
