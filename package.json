@@ -1,0 +1,53 @@
+{
+  "name": "github-sample",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "@types/jest": "^22.2.2",
+    "@types/react": "^16.3.0",
+    "@types/react-native": "^0.52.7",
+    "@types/react-test-renderer": "^16.0.1",
+    "babel-jest": "^22.4.3",
+    "babel-preset-react-native": "^4.0.0",
+    "ghooks": "^2.0.2",
+    "jest": "^22.4.3",
+    "jest-react-native": "^18.0.0",
+    "react-native-typescript-transformer": "^1.2.3",
+    "react-test-renderer": "16.3.0-alpha.1",
+    "tslint": "^5.9.1",
+    "ts-jest": "^22.4.2",
+    "tslint-config-airbnb": "^5.5.0",
+    "tslint-react": "^3.4.0"
+  },
+  "scripts": {
+    "start": "react-native start",
+    "start:reset": "react-native start --reset-cache",
+    "watch": "tsc -w",
+    "start:ios": "concurrently -r 'npm run watch' 'react-native run-ios'",
+    "start:android": "concurrently -r 'npm run watch' 'react-native run-android'",
+    "start:android:release": "react-native run-android --variant=release",
+    "lint": "tslint -p ./tsconfig.json --fix",
+    "code:check": "tsc && tslint -p ./tsconfig.json",
+    "test": "jest",
+    "compile:android:signed": "cd android && ./gradlew assembleRelease"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "dependencies": {
+    "concurrently": "^3.5.1",
+    "ramda": "^0.25.0",
+    "react": "16.3.0-alpha.1",
+    "react-native": "0.54.0",
+    "react-navigation": "^1.5.11",
+    "react-redux": "^5.0.6",
+    "recompose": "^0.26.0",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^5.6.5",
+    "redux-saga": "0.16.0",
+    "remote-redux-devtools": "^0.5.12",
+    "reselect": "^3.0.1",
+    "typescript": "^2.8.1"
+  }
+}
