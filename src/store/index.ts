@@ -1,4 +1,4 @@
-/* import { AsyncStorage } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistCombineReducers, persistStore } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
@@ -7,7 +7,6 @@ import { composeWithDevTools } from 'remote-redux-devtools';
 
 import { rootReducer } from '../reducers/index';
 import { configureLogger } from './logger';
-import { withReduxDevTools } from './options';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -19,20 +18,13 @@ const config = {
   stateReconciler: autoMergeLevel2,
 };
 
-let composeEnhancers = compose;
+const composeEnhancers = __DEV__ ? composeWithDevTools : compose;
 
 if (__DEV__) {
-  GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
   const loggerMiddleware = configureLogger();
-  middlewares.push(loggerMiddleware);
 
-  if (withReduxDevTools && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
-    composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-        // options like actionSanitizer, stateSanitizer
-    });
-  } else {
-    composeEnhancers = composeWithDevTools;
-  }
+  GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
+  middlewares.push(loggerMiddleware);
 }
 
 export const store = createStore(
@@ -52,7 +44,7 @@ export async function configureStore() {
 
   return new Promise((resolve) => {
     const persistor = persistStore(store);
+
     resolve({ store, persistor });
   });
 }
- */
