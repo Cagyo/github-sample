@@ -23,7 +23,7 @@ const composeEnhancers = __DEV__ ? composeWithDevTools : compose;
 if (__DEV__) {
   const loggerMiddleware = configureLogger();
 
-  GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
+  // GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
   middlewares.push(loggerMiddleware);
 }
 

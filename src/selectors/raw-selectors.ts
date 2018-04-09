@@ -2,4 +2,5 @@ import R from 'ramda';
 
 export const getNavigator = R.path(['nav']);
 
-export const getActiveCourseTitle = R.path(['course', 'metadata', 'name']);
+export const getSelectedUserId = R.path(['users', 'selectedUserId']);
+export const getUsers = R.path(['users', 'users']);

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Platform, UIManager, View } from 'react-native';
+import { Platform, UIManager } from 'react-native';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/es/integration/react';
 
-// import { rootSaga } from './sagas';
+import { rootSaga } from './sagas';
 import { configureStore } from './store';
 import { Router } from './router';
 
@@ -25,7 +25,7 @@ export class App extends Component<IAppProps, IAppState> {
 
   initializeStore = () => {
     configureStore().then(({ store, persistor }) => {
-      // store.runSaga(rootSaga);
+      store.runSaga(rootSaga);
 
       this.setState({ store, persistor });
     });

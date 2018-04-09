@@ -1,3 +1,9 @@
-import { HomeScreenComponent } from './component';
+import { connect } from 'react-redux';
 
-export const HomeScreen = HomeScreenComponent;
+import { HomeScreenComponent } from './component';
+import { connector } from './selectors';
+import { requestUsers } from './../../actions';
+
+export const HomeScreen = connect(connector, {
+  requestUsers
+})(HomeScreenComponent);
