@@ -5,6 +5,7 @@ import { PersistGate } from 'redux-persist/es/integration/react';
 
 // import { rootSaga } from './sagas';
 import { configureStore } from './store';
+import { Router } from './router';
 
 export class App extends Component<IAppProps, IAppState> {
   state = {
@@ -40,7 +41,9 @@ export class App extends Component<IAppProps, IAppState> {
         <PersistGate
           persistor={persistor}
         >
-          <View />
+          <Router
+            dispatch={store.dispatch}
+          />
         </PersistGate>
       </Provider>
     );
