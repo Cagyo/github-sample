@@ -7,4 +7,5 @@ export const rootReducer = {
   application: appReducer,
   nav: navReducer,
   users: usersReducer,
+  followers: followersReducer,
 };

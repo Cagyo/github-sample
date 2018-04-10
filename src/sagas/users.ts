@@ -1,16 +1,27 @@
 import { perPage } from './../constants/common';
 import { takeLatest, call, select, put } from 'redux-saga/effects';
 import { Alert } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 
-import { REQUEST_USERS, REQUEST_USER_FOLLOWERS, REQUEST_USERS_NEXT, REQUEST_USER_FOLLOWERS_NEXT } from './../actions/types';
 import {
-  getSelectedUserId, getUsersSince,
+  REQUEST_USERS,
+  REQUEST_USER_FOLLOWERS,
+  REQUEST_USERS_NEXT,
+  REQUEST_USER_FOLLOWERS_NEXT,
+  SELECT_USER,
+} from './../actions/types';
+import {
+  getSelectedUserId, getUsersSince, getFollowersSince,
 } from '../selectors/raw-selectors';
 import {
   requestUsersSuccess,
   requestUsersFail,
   requestUsersNextSuccess,
   requestUsersNextFail,
+  requestUserFollowersSuccess,
+  requestUserFollowersFail,
+  requestUserFollowersNextSuccess,
+  requestUserFollowersNextFail,
 } from '../actions';
 import {
   getUsers,
@@ -28,16 +39,34 @@ function* onRequestUsers({ type }: any) {
   }
 }
 
-function* onRequestUserFollowers({ payload }: any) {
-  try {
-    const userId = yield select(getSelectedUserId);
-    const res = yield call(getUserFollowers, userId);
+function* onRequestUserFollowers({ type }: any) {
+  const userId = yield select(getSelectedUserId);
 
-    yield put(requestUsersSuccess(res));
-  } catch (exc) {
-    yield put(requestUsersFail());
-    Alert.alert('Error');
+  if (type === REQUEST_USER_FOLLOWERS) {
+    yield call(
+      requestWithPagination,
+      getUserFollowers,
+      1,
+      requestUserFollowersSuccess,
+      requestUserFollowersFail,
+      { path: userId, get: {} },
+    );
+  } else {
+    const followersSince = yield select(getFollowersSince);
+
+    yield call(
+      requestWithPagination,
+      getUserFollowers,
+      followersSince,
+      requestUserFollowersNextSuccess,
+      requestUserFollowersNextFail,
+      { path: userId, get: {} }
+    );
   }
+}
+
+function* onSelectUser() {
+  yield put(NavigationActions.navigate({ routeName: 'Followers' }));
 }
 
 export function* watchRequestUsers() {
@@ -54,4 +83,8 @@ export function* watchRequestUserFollowers() {
 
 export function* watchRequestUserFollowersNext() {
   yield takeLatest(REQUEST_USER_FOLLOWERS_NEXT, onRequestUserFollowers);
+}
+
+export function* watchSelectUser() {
+  yield takeLatest(SELECT_USER, onSelectUser);
 }

@@ -5,14 +5,14 @@ import { View } from 'react-native';
 import { noop } from 'redux-saga/utils';
 
 interface IHomeScreenProps {
-  users: IUserData[];
+  followers: IUserData[];
   requestUserFollowers: () => void;
   requestUserFollowersNext: () => void;
 }
 
 export class FollowersScreenComponent extends React.Component<IHomeScreenProps> {
   componentDidMount() {
-    if (!this.props.users.length) {
+    if (!this.props.followers.length) {
       this.props.requestUserFollowers();
     }
   }
@@ -22,12 +22,12 @@ export class FollowersScreenComponent extends React.Component<IHomeScreenProps> 
   }
 
   render() {
-    const { users } = this.props;
+    const { followers } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
         <UserList
-          users={users}
+          users={followers}
           onEndReached={this.endReachedHandler}
           onItemSelect={noop}
         />
