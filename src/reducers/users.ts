@@ -1,7 +1,10 @@
+import { perPage } from './../constants/common';
 import * as types from '../actions/types';
 
 export const initialState = {
   users: [],
+  since: 0,
+  selectedUserLogin: null,
 };
 
 export function usersReducer(state = initialState, { type, payload }) {
@@ -10,16 +13,18 @@ export function usersReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         users: payload,
+        since: perPage,
       };
-    case types.REQUEST_USER_FOLLOWERS_SUCCESS:
+    case types.REQUEST_USERS_NEXT_SUCCESS:
       return {
         ...state,
-        followers: payload,
+        users: [...state.users, ...payload],
+        since: state.since + perPage,
       };
     case types.SELECT_USER:
       return {
         ...state,
-        selectedUserId: payload,
+        selectedUserLogin: payload,
       };
     default:
       return state;

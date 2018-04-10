@@ -2,27 +2,23 @@ import React from 'react';
 
 import { UserList } from '../../components/user-list';
 import { View } from 'react-native';
+import { noop } from 'redux-saga/utils';
 
 interface IHomeScreenProps {
   users: IUserData[];
-  requestUsers: () => void;
-  requestUsersNext: () => void;
-  selectUser: (userLogin: string) => void;
+  requestUserFollowers: () => void;
+  requestUserFollowersNext: () => void;
 }
 
-export class HomeScreenComponent extends React.Component<IHomeScreenProps> {
+export class FollowersScreenComponent extends React.Component<IHomeScreenProps> {
   componentDidMount() {
     if (!this.props.users.length) {
-      this.props.requestUsers();
+      this.props.requestUserFollowers();
     }
   }
 
   endReachedHandler = () => {
-    this.props.requestUsersNext();
-  }
-
-  itemSelectHandler = (id) => {
-    this.props.selectUser(id);
+    this.props.requestUserFollowersNext();
   }
 
   render() {
@@ -32,8 +28,8 @@ export class HomeScreenComponent extends React.Component<IHomeScreenProps> {
       <View style={{ flex: 1 }}>
         <UserList
           users={users}
-          onItemSelect={this.itemSelectHandler}
           onEndReached={this.endReachedHandler}
+          onItemSelect={noop}
         />
       </View>
     );

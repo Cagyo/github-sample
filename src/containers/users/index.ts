@@ -2,8 +2,10 @@ import { connect } from 'react-redux';
 
 import { HomeScreenComponent } from './component';
 import { connector } from './selectors';
-import { requestUsers } from './../../actions';
+import { requestUsers, requestUsersNext, selectUser } from './../../actions';
 
 export const HomeScreen = connect(connector, {
-  requestUsers
+  requestUsers,
+  requestUsersNext,
+  selectUser,
 })(HomeScreenComponent);
