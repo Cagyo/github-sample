@@ -3,7 +3,7 @@ import R from 'ramda';
 export const getNavigator = R.path(['nav']);
 
 export const getSelectedUserLogin = R.path(['users', 'selectedUserLogin']);
-export const getUsers = R.path(['users', 'users']);
+export const getUsers = R.path(['users', 'list']);
 export const getUsersSince = R.path(['users', 'since']);
 export const getUsersLoading = R.path(['users', 'loading']);
 

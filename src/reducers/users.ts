@@ -1,7 +1,7 @@
 import * as types from '../actions/types';
 
 export const initialState = {
-  users: [],
+  list: [],
   since: 0,
   selectedUserLogin: null,
   loading: false,
@@ -27,14 +27,14 @@ export function usersReducer(state = initialState, { type, payload }) {
     case types.REQUEST_USERS_SUCCESS:
       return {
         ...state,
-        users: payload,
+        list: payload,
         since: getUserWithMaxId(payload).id,
         loading: false,
       };
     case types.REQUEST_USERS_NEXT_SUCCESS:
       return {
         ...state,
-        users: [...state.users, ...payload],
+        list: [...state.list, ...payload],
         since: getUserWithMaxId(payload).id,
         loading: false,
       };

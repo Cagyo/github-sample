@@ -41,6 +41,8 @@ export const UserList: React.SFC<IUserListProps> = (props) => {
         keyExtractor={user => `${user.id}${user.login}`}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.5}
+        initialNumToRender={20}
+        windowSize={4}
       />
     );
   }
