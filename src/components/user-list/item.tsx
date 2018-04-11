@@ -7,19 +7,8 @@ import {
 } from 'react-native';
 import { compose, withHandlers } from 'recompose';
 
-// Linking.openURL
 import { styles } from './styles';
 import { Link } from '../link';
-
-interface IUserItemInnerProps {
-  pressHandler: () => void;
-}
-
-interface IUserItemOuterProps {
-  user: IUserData;
-  touchable?: boolean;
-  onPress: (login: string) => void;
-}
 
 const enchance = compose<IUserItemInnerProps, IUserItemOuterProps>(
   withHandlers<IUserItemOuterProps, {}>({

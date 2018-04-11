@@ -1,4 +1,3 @@
-// App
 interface IAppProps {}
 
 interface IAppState {

@@ -4,15 +4,6 @@ import { FlatList } from 'react-native';
 import { styles } from './styles';
 import { UserItem } from './item';
 
-interface IUserListProps {
-  users: IUserData[];
-  loading: boolean;
-  touchable?: boolean;
-  onEndReached: () => void;
-  onItemSelect: (userLogin: string) => void;
-  onRefresh: () => void;
-}
-
 export const UserList: React.SFC<IUserListProps> = (props) => {
   const {
     users,
@@ -49,5 +40,3 @@ export const UserList: React.SFC<IUserListProps> = (props) => {
 
   return null;
 };
-
-// export const UserList = enchance(UserListComponent);

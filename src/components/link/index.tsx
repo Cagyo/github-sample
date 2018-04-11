@@ -8,14 +8,6 @@ import { compose, withHandlers } from 'recompose';
 
 import { styles } from './styles';
 
-interface ILinkOuterProps {
-  reference: string;
-}
-
-interface ILinkInnerProps {
-  pressHandler: () => void;
-}
-
 const enchance = compose<ILinkInnerProps, ILinkOuterProps>(
   withHandlers<ILinkOuterProps, {}>({
     pressHandler: props => () => Linking.openURL(props.reference),
