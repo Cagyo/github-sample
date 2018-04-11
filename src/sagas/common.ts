@@ -13,7 +13,14 @@ export function* requestWithPagination(apiMethod, since, successAction, failActi
       : yield call(apiMethod, { ...options.get, since, per_page: perPage });
     yield put(successAction(res));
   } catch (exc) {
-    yield call(Alert.alert, 'Error');
+    if (exc.networkError) {
+      yield call(Alert.alert, 'No internet connection');
+    } else if (exc.message) {
+      yield call(Alert.alert, exc.message);
+    } else {
+      yield call(Alert.alert, 'Unexpected error');
+    }
+
     yield put(failAction(exc));
   }
 }
