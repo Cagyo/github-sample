@@ -21,12 +21,20 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
   },
+  textWrapper: {
+    flex: 1,
+    flexDirection: 'row',
+  },
   login: {
-    flex: 1 / 3,
+    flex: 2 / 3,
     justifyContent: 'center',
   },
+  loginText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
   avatar: {
-    flex: 1 / 3,
+    width: 100,
   },
   avatarImage: {
     width: 100,

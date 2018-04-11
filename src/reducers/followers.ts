@@ -9,11 +9,6 @@ export const initialState = {
 export function followersReducer(state = initialState, { type, payload }) {
   switch (type) {
     case types.REQUEST_USER_FOLLOWERS:
-      return {
-        ...state,
-        list: [],
-        loading: true,
-      };
     case types.REQUEST_USER_FOLLOWERS_NEXT:
       return {
         ...state,
@@ -38,6 +33,11 @@ export function followersReducer(state = initialState, { type, payload }) {
         list: [...state.list, ...payload],
         since: state.since + 1,
         loading: false,
+      };
+    case types.SELECT_USER:
+      return {
+        ...state,
+        list: [],
       };
     default:
       return state;

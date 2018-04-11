@@ -7,7 +7,9 @@ import { styles } from './styles';
 
 export class FollowersScreenComponent extends React.Component<IFollowersScreenProps> {
   componentDidMount() {
-    this.props.requestUserFollowers();
+    const { followers, requestUserFollowers } = this.props;
+
+    if (!followers.length) requestUserFollowers();
   }
 
   endReachedHandler = () => {

@@ -31,6 +31,7 @@ export class HomeScreenComponent extends React.Component<IHomeScreenProps> {
         <UserList
           users={users}
           loading={loading}
+          touchable
           onItemSelect={this.itemSelectHandler}
           onEndReached={this.endReachedHandler}
           onRefresh={this.refreshHandler}

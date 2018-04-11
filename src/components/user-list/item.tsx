@@ -15,30 +15,34 @@ interface IUserItemInnerProps {
   pressHandler: () => void;
 }
 
-interface IUserItemProps {
+interface IUserItemOuterProps {
   user: IUserData;
+  touchable?: boolean;
   onPress: (login: string) => void;
 }
 
-const enchance = compose<{}, IUserItemProps>(
-  withHandlers<IUserItemProps, {}>({
+const enchance = compose<IUserItemInnerProps, IUserItemOuterProps>(
+  withHandlers<IUserItemOuterProps, {}>({
     pressHandler: props => () => props.onPress(props.user.login),
   })
 );
 
-const UserItemComponent: React.SFC<IUserItemInnerProps & IUserItemProps> = (props) => {
-  const { user, pressHandler } = props;
+const UserItemComponent: React.SFC<IUserItemInnerProps & IUserItemOuterProps> = (props) => {
+  const { user, pressHandler, touchable } = props;
+  const Component = touchable ? TouchableOpacity : View;
 
   return (
-    <TouchableOpacity style={styles.item} onPress={pressHandler}>
-      <View style={styles.login}>
-        <Text>{user.login}</Text>
+    <Component style={styles.item} onPress={pressHandler}>
+      <View style={styles.textWrapper}>
+        <View style={styles.login}>
+          <Text style={styles.loginText}>{user.login}</Text>
+        </View>
+        <Link reference={user.html_url} />
       </View>
-      <Link reference={user.html_url} />
       <View style={styles.avatar}>
         <Image source={{ uri: user.avatar_url }} style={styles.avatarImage} />
       </View>
-    </TouchableOpacity>
+    </Component>
   );
 };
 

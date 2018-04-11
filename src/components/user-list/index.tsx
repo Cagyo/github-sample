@@ -1,6 +1,5 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-// import { compose, withHandlers } from 'recompose';
 
 import { styles } from './styles';
 import { UserItem } from './item';
@@ -8,20 +7,17 @@ import { UserItem } from './item';
 interface IUserListProps {
   users: IUserData[];
   loading: boolean;
+  touchable?: boolean;
   onEndReached: () => void;
   onItemSelect: (userLogin: string) => void;
   onRefresh: () => void;
 }
 
-// const enchance = compose(
-//   withHandlers({
-//   }),
-// );
-
 export const UserList: React.SFC<IUserListProps> = (props) => {
   const {
     users,
     loading,
+    touchable,
     onEndReached,
     onItemSelect,
     onRefresh,
@@ -36,6 +32,7 @@ export const UserList: React.SFC<IUserListProps> = (props) => {
         renderItem={({ item }) => (
           <UserItem
             user={item}
+            touchable={touchable}
             onPress={onItemSelect}
           />
         )}

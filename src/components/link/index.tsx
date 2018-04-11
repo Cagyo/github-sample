@@ -24,7 +24,12 @@ const enchance = compose<ILinkInnerProps, ILinkOuterProps>(
 
 const LinkComponent: React.SFC<ILinkInnerProps & ILinkOuterProps> = ({ pressHandler }) => (
   <View style={styles.link}>
-    <Text onPress={pressHandler}>profile link</Text>
+    <Text
+      style={styles.text}
+      onPress={pressHandler}
+    >
+      profile link
+    </Text>
   </View>
 );
 
