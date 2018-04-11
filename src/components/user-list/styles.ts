@@ -1,6 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
-
-const { width } = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   mainContainer: {
@@ -10,7 +8,6 @@ export const styles = StyleSheet.create({
     margin: 5,
   },
   item: {
-    width: width - 10,
     flex: 1,
     height: 112,
     flexDirection: 'row',
@@ -20,6 +17,8 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     padding: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   textWrapper: {
     flex: 1,
