@@ -1,5 +1,3 @@
-## Development Setup
-
 # install dependencies
 ```bash
 yarn
