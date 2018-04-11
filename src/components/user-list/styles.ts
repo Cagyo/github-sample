@@ -1,20 +1,20 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
   mainContainerContent: {
-    padding: 10,
+    margin: 5,
   },
   item: {
-    width,
+    width: width - 10,
     flex: 1,
     height: 112,
     flexDirection: 'row',
-    marginBottom: 20,
+    marginBottom: 5,
     backgroundColor: '#ffffff',
     borderColor: '#cccccc',
     borderWidth: 1,
@@ -25,18 +25,13 @@ export const styles = StyleSheet.create({
     flex: 1 / 3,
     justifyContent: 'center',
   },
-  link: {
-    flex: 1 / 3,
-    justifyContent: 'center',
-  },
   avatar: {
     flex: 1 / 3,
-    width: 100,
-    height: 100,
   },
   avatarImage: {
     width: 100,
     height: 100,
     borderRadius: 50,
+    alignSelf: 'center',
   }
 });

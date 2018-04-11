@@ -1,9 +1,6 @@
-import * as types from '../actions/types';
+export const initialState = {};
 
-export const initialState = {
-};
-
-export function appReducer(state = initialState, { type, payload }) {
+export function appReducer(state = initialState, { type }) {
   switch (type) {
     default:
       return state;

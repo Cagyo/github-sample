@@ -1,18 +1,32 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import { compose, withHandlers } from 'recompose';
+// import { compose, withHandlers } from 'recompose';
 
 import { styles } from './styles';
-import { requestUsers } from '../../actions';
 import { UserItem } from './item';
 
-const enchance = compose(
-  withHandlers({
-  }),
-);
+interface IUserListProps {
+  users: IUserData[];
+  loading: boolean;
+  onEndReached: () => void;
+  onItemSelect: (userLogin: string) => void;
+  onRefresh: () => void;
+}
 
-const UserListComponent = (props) => {
-  const { users, onEndReached, onItemSelect } = props;
+// const enchance = compose(
+//   withHandlers({
+//   }),
+// );
+
+export const UserList: React.SFC<IUserListProps> = (props) => {
+  const {
+    users,
+    loading,
+    onEndReached,
+    onItemSelect,
+    onRefresh,
+  } = props;
+
   if (users.length) {
     return (
       <FlatList
@@ -25,8 +39,8 @@ const UserListComponent = (props) => {
             onPress={onItemSelect}
           />
         )}
-        // onRefresh={requestUsers}
-        // refreshing={loading}
+        onRefresh={onRefresh}
+        refreshing={loading}
         keyExtractor={user => `${user.id}${user.login}`}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.5}
@@ -37,4 +51,4 @@ const UserListComponent = (props) => {
   return null;
 };
 
-export const UserList = enchance(UserListComponent);
+// export const UserList = enchance(UserListComponent);

@@ -1,14 +1,8 @@
 import React from 'react';
-
-import { UserList } from '../../components/user-list';
 import { View } from 'react-native';
 
-interface IHomeScreenProps {
-  users: IUserData[];
-  requestUsers: () => void;
-  requestUsersNext: () => void;
-  selectUser: (userLogin: string) => void;
-}
+import { UserList } from '../../components/user-list';
+import { styles } from './styles';
 
 export class HomeScreenComponent extends React.Component<IHomeScreenProps> {
   componentDidMount() {
@@ -21,19 +15,25 @@ export class HomeScreenComponent extends React.Component<IHomeScreenProps> {
     this.props.requestUsersNext();
   }
 
-  itemSelectHandler = (id) => {
-    this.props.selectUser(id);
+  itemSelectHandler = (userLogin: string) => {
+    this.props.selectUser(userLogin);
+  }
+
+  refreshHandler = () => {
+    this.props.requestUsers();
   }
 
   render() {
-    const { users } = this.props;
+    const { users, loading } = this.props;
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={styles.wrapper}>
         <UserList
           users={users}
+          loading={loading}
           onItemSelect={this.itemSelectHandler}
           onEndReached={this.endReachedHandler}
+          onRefresh={this.refreshHandler}
         />
       </View>
     );

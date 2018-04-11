@@ -8,4 +8,4 @@ export const HomeScreen = connect(connector, {
   requestUsers,
   requestUsersNext,
   selectUser,
-})(HomeScreenComponent);
+})(HomeScreenComponent as any);

@@ -6,7 +6,12 @@ import { connector } from './selectors';
 import { RouterConfig } from './routes/config';
 import { addNavigationHelpers } from 'react-navigation';
 
-export const RouterComponent = ({ dispatch, nav }) => {
+interface IRouterProps {
+  dispatch: any;
+  nav: any;
+}
+
+export const RouterComponent: React.SFC<IRouterProps> = ({ dispatch, nav }) => {
   return (
     <RouterConfig
       navigation={addNavigationHelpers({
@@ -17,6 +22,6 @@ export const RouterComponent = ({ dispatch, nav }) => {
   );
 };
 
-export const Router = connect(connector, {
+export const Router: any = connect(connector, {
   onAppInit,
-})(RouterComponent);
+})(RouterComponent as any);

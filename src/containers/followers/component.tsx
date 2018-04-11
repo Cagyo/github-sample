@@ -1,35 +1,34 @@
 import React from 'react';
-
-import { UserList } from '../../components/user-list';
 import { View } from 'react-native';
 import { noop } from 'redux-saga/utils';
 
-interface IHomeScreenProps {
-  followers: IUserData[];
-  requestUserFollowers: () => void;
-  requestUserFollowersNext: () => void;
-}
+import { UserList } from '../../components/user-list';
+import { styles } from './styles';
 
-export class FollowersScreenComponent extends React.Component<IHomeScreenProps> {
+export class FollowersScreenComponent extends React.Component<IFollowersScreenProps> {
   componentDidMount() {
-    if (!this.props.followers.length) {
-      this.props.requestUserFollowers();
-    }
+    this.props.requestUserFollowers();
   }
 
   endReachedHandler = () => {
     this.props.requestUserFollowersNext();
   }
 
+  refreshHandler = () => {
+    this.props.requestUserFollowers();
+  }
+
   render() {
-    const { followers } = this.props;
+    const { followers, loading } = this.props;
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={styles.wrapper}>
         <UserList
           users={followers}
+          loading={loading}
           onEndReached={this.endReachedHandler}
           onItemSelect={noop}
+          onRefresh={this.refreshHandler}
         />
       </View>
     );

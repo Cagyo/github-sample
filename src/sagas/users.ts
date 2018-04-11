@@ -1,6 +1,4 @@
-import { perPage } from './../constants/common';
 import { takeLatest, call, select, put } from 'redux-saga/effects';
-import { Alert } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
 import {
@@ -11,7 +9,9 @@ import {
   SELECT_USER,
 } from './../actions/types';
 import {
-  getSelectedUserId, getUsersSince, getFollowersSince,
+  getSelectedUserLogin,
+  getUsersSince,
+  getFollowersSince,
 } from '../selectors/raw-selectors';
 import {
   requestUsersSuccess,
@@ -31,16 +31,28 @@ import { requestWithPagination } from './common';
 
 function* onRequestUsers({ type }: any) {
   if (type === REQUEST_USERS) {
-    yield call(requestWithPagination, getUsers, 0, requestUsersSuccess, requestUsersFail);
+    yield call(
+      requestWithPagination,
+      getUsers,
+      0,
+      requestUsersSuccess,
+      requestUsersFail,
+    );
   } else {
     const usersSince = yield select(getUsersSince);
 
-    yield call(requestWithPagination, getUsers, usersSince + perPage, requestUsersNextSuccess, requestUsersNextFail);
+    yield call(
+      requestWithPagination,
+      getUsers,
+      usersSince,
+      requestUsersNextSuccess,
+      requestUsersNextFail,
+    );
   }
 }
 
 function* onRequestUserFollowers({ type }: any) {
-  const userId = yield select(getSelectedUserId);
+  const userId = yield select(getSelectedUserLogin);
 
   if (type === REQUEST_USER_FOLLOWERS) {
     yield call(
